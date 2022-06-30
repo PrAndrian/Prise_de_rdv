@@ -9,6 +9,11 @@
     <title>User page</title>
 </head>
 <body>
-    <%=data%>
+    
+   <a href="/user/<%=data.id%> ">
+       <button id="boutonRDV" class="btn btn-outline-dark" style="padding-left: 2.5rem; padding-right: 2.5rem">Voir RDV</button>
+   </a> 
+
+    <%= data%>
 </body>
 </html>

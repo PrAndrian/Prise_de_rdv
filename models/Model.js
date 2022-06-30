@@ -9,6 +9,4 @@ const ModelSchema = mongoose.Schema({
 
 });
 
-
-
 module.exports = mongoose.model('Model', ModelSchema);

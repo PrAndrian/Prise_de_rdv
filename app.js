@@ -1,6 +1,6 @@
 var express = require("express");
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const { default: mongoose } = require("mongoose");
+const { default: mongoose, model } = require("mongoose");
 const methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var app = express();
@@ -12,11 +12,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const path = require("path");
 const Model = require("./models/Model");
 const User = require("./models/User");
+const { format } = require("path");
 require("dotenv").config();
 
 // Pour le path du dossier "public" pour y mettre CSS JS IMG
 app.use(express.static(path.join(__dirname, "public")));
-
 
 const url = process.env.DATABASE_URL;
 
@@ -41,11 +41,11 @@ app.get("/", function (req, res) {
 });
 
 app.get("/rdv", function (req, res) {
-  Model.find()
-    .then((data) => {
-      res.render("Rdv", { data: data });
-    })
-    .catch((err) => console.log(err));
+    Model.find()
+        .then((data) => {
+                res.render("Rdv", { data: data })
+        })
+        .catch((err) => console.log(err));
 });
 
 app.post("/submit-rdv", function (req, res) {
@@ -102,14 +102,34 @@ app.post("/api/login", (req, res) => {
       // if(user.password != req.body.password){
       //     return res.status(404).send('Invalid password');
       // }
-      res.render("UserPage", { data: user });
+    res.render("UserPage", { data: user });
     })
     .catch((err) => console.log(err));
 });
+
+app.get("/user/:id", (req, res) => {
+        User.findOne({
+            _id: req.params.id,
+        }) 
+        .then((user) => {
+            res.render("Rdv", { dataUser: user});
+        })
+        .catch((err) => console.log(err));
+});
+
+app.get("/user/:email", (req, res) => {
+    Model.findOne({
+        email: req.params.email,
+    }).then((rdv) => {
+        res.render("Rdv", {dataRdv: rdv});
+    }).catch((err) => console.log(err));
+});
+
+
 
 const port = 5001;
 // const port = process.env.PORT || 5000;
 
 var server = app.listen(port, function () {
-  console.log("Node server is running!!");
+    console.log("Node server is running!!");
 });
