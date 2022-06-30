@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <%- include('partials/Bootstrap.ejs') %>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/home.css">
+    <title>Prise de RDV</title>
+</head>
+<body>
+    <%- include('partials/Navbar.ejs')%>
+    <h1>Prendre un Rendez-vous</h1>
+    <form action="/submit-rdv" method="post" onsubmit="myFunction()">
+        <label for="prenom">Prénom</label>
+        <input type="text" name="firstname" id="firstname" />
+        <br />
+        <label for="nom">Nom</label>
+        <input type="text" name="lastname" id="nom" />
+        <br />
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+        <br />
+        <label for="rdvDate">Date de RDV</label>
+        <input type="date" id="rdvDate" name="rdvDate" min="">
+        <!-- <input type="date" id="rdvDate" name="rdvDate" value="<%= %>" min="2018-01-01" max="2018-12-31"> -->
+        <br>
+        <label for="rdvHeure">Heure de RDV</label>
+        <input type="time" id="rdvHeure" name="rdvHeure">
+        <br/>
+        <button type="submit" id="boutonEnvoyer" class="btn btn-lg" style="padding-left: 2.5rem; padding-right: 2.5rem">Envoyer</button>
+    </form>
+    <a id="aRDV" href="/rdv" ><button class="btn btn-lg" id="boutonRDV">Voir les RDV</button></a>
+    <script src="home.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
