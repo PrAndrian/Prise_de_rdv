@@ -64,7 +64,7 @@ app.post("/submit-rdv", function (req, res) {
     .catch((err) => console.log(err));
 });
 
-// API pour l'authentification
+// API pour l'authentification !
 app.post("/api/register", (req, res) => {
   const Data = new User({
     username: req.body.username,
