@@ -1,6 +1,8 @@
 var express = require("express");
 const { MongoClient, ServerApiVersion } = require("mongodb");
 const { default: mongoose, model } = require("mongoose");
+var ObjectId = require('mongodb').ObjectId;
+
 const methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 var app = express();
@@ -19,7 +21,7 @@ require("dotenv").config();
 app.use(express.static(path.join(__dirname, "public")));
 
 const url = process.env.DATABASE_URL;
-
+    
 const connectionParams = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -53,8 +55,8 @@ app.post("/submit-rdv", function (req, res) {
     lastname: req.body.lastname,
     firstname: req.body.firstname,
     email: req.body.email,
-    rdvDate: req.body.rdvDate,
-    rdvHeure: req.body.rdvHeure,
+    rdv_date: req.body.rdv_date,
+    rdv_heure: req.body.rdv_heure,
   });
   Data.save()
     .then(() => {
@@ -97,6 +99,7 @@ app.post("/api/login", (req, res) => {
       }
       console.log(user);
       if (!bcrypt.compareSync(req.body.password, user.password)) {
+
         return res.status(404).send("Invalid password");
       }
       // if(user.password != req.body.password){
@@ -109,21 +112,27 @@ app.post("/api/login", (req, res) => {
 
 app.get("/user/:id", (req, res) => {
         User.findOne({
-            _id: req.params.id,
+          _id: req.params.id,
         }) 
-        .then((user) => {
-            res.render("Rdv", { dataUser: user});
+        .then((dataUser) => {
+          Model.find({email : dataUser.email})
+          .then(dataRdv=>{
+            res.render("Rdv", { user: dataUser, rdv : dataRdv});
+          })
         })
         .catch((err) => console.log(err));
 });
 
-app.get("/user/:email", (req, res) => {
-    Model.findOne({
-        email: req.params.email,
-    }).then((rdv) => {
-        res.render("Rdv", {dataRdv: rdv});
-    }).catch((err) => console.log(err));
+app.get("/prv/:id", (req, res) => {
+  User.findOne({
+    _id: req.params.id,
+  }) 
+  .then((dataUser) => {
+      res.render("Home", { user: dataUser});
+  })
+  .catch((err) => console.log(err));
 });
+
 
 
 

@@ -4,8 +4,8 @@ const ModelSchema = mongoose.Schema({
     lastname : {type:String, required : true},
     firstname : {type:String, required : true},
     email : {type:String, required : true},
-    rdvDate : {type:Date, required : true},
-    rdvHeure : {type:String, required : true},
+    rdv_date : {type:Date, required : true},
+    rdv_heure : {type:String, required : true},
 
 });
 

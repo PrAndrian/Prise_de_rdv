@@ -12,6 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="css/home.css" />
     <title>Document</title>
   </head>
@@ -28,46 +29,29 @@
             <th scope="col">Heure RDV</th>
           </tr>
         </thead>
-        <%#data.forEach(form => { %>
+        <%rdv.forEach((r) => { %>
         <tbody>
           <tr>
-            <%=dataUser%>
-            <td><%#= form.lastname %></td>
-            <td><%#= form.firstname %></td>
-            <td><%#= form.email %></td>
-            <td><%#= form.rdvDate.toLocaleDateString("fr") %></td>
-            <td><%#= form.rdvHeure %></td>
+            <td><%= r.lastname %></td>
+            <td><%= r.firstname %></td>
+            <td><%= r.email %></td>
+            <td><%= r.rdv_date.toLocaleDateString("fr") %></td>
+            <td><%= r.rdv_heure %></td>
           </tr>
         </tbody>
-        <%# }); %>
+        <% }); %>
       </table>
-
-      <a href="/"
+      <a href="/prv/<%=user._id%>"
         ><button
           type="submit"
           id="boutonRDV"
-          class="btn btn-lg"
+          class="btn btn-outline-dark"
           style="padding-left: 2.5rem; padding-right: 2.5rem"
         >
           Prendre RDV
         </button></a
       >
-
-      <a href="/user/<%=dataUser.id%>">
-        <button
-          type="submit"
-          id="boutonRDV"
-          class="btn btn-lg"
-          style="padding-left: 2.5rem; padding-right: 2.5rem"
-        >
-          Afficher rdv
-        </button>
-
-        
-      </a>
-      <%#=dataRdv.email%>      
     </div>
-
-    <script src="rdv.js"></script>
+    <script type="text/javascript" src="js/toto.js"></script>
   </body>
 </html>

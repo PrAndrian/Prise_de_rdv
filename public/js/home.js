@@ -14,7 +14,7 @@ const validate = dateString => {
     return true;
 }
   // Sets the value to '' in case of an invalid date
-document.querySelector('#rdvDate').onchange = evt => {
+document.querySelector('#rdv_date').onchange = evt => {
     if (!validate(evt.target.value)) {
         evt.target.value = '';
         alert('Invalid date');
@@ -23,7 +23,7 @@ document.querySelector('#rdvDate').onchange = evt => {
 
 // Fonction pour empécher de prendre un rdv si un ou plusieurs chalps ne sont pas remplis
 function myFunction() {
-    if(!document.getElementById("rdvDate").value) {
+    if(!document.getElementById("rdv_date").value) {
         console.log("test1")
         alert("Remplissez le champ Date")
     }else if(!document.getElementById("rdvHeure").value){
