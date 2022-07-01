@@ -43,11 +43,9 @@ app.get("/", function (req, res) {
 });
 
 app.get("/rdv", function (req, res) {
-    Model.find()
-        .then((data) => {
-                res.render("Rdv", { data: data })
-        })
-        .catch((err) => console.log(err));
+    Model.find().then((data) => {
+        res.render("Rdv", { data: data })
+      }).catch((err) => console.log(err));
 });
 
 app.post("/submit-rdv", function (req, res) {
@@ -123,17 +121,24 @@ app.get("/user/:id", (req, res) => {
         .catch((err) => console.log(err));
 });
 
-app.get("/prv/:id", (req, res) => {
-  User.findOne({
-    _id: req.params.id,
-  }) 
-  .then((dataUser) => {
-      res.render("Home", { user: dataUser});
+app.put("/prv/edit/:email", function (req, res) {
+  Model.findOne({
+    email: req.params.email,
   })
-  .catch((err) => console.log(err));
+    .then((rdv) => {
+        rdv.rdv_date = req.body.rdv_date,
+        rdv.rdv_heure = req.body.rdv_heure
+
+        rdv
+        .save()
+        .then(() => {
+          console.log("Data modified");
+          res.redirect("/");
+        })
+        .catch((err) => console.log(err));
+    })
+    .catch((err) => console.log(err));
 });
-
-
 
 
 const port = 5001;

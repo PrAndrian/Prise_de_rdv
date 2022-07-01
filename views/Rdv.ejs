@@ -18,40 +18,73 @@
   </head>
   <body>
     <%- include('partials/Navbar.ejs')%>
-    <div class="container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Prénom</th>
-            <th scope="col">Email</th>
-            <th scope="col">Date RDV</th>
-            <th scope="col">Heure RDV</th>
-          </tr>
-        </thead>
-        <%rdv.forEach((r) => { %>
-        <tbody>
-          <tr>
-            <td><%= r.lastname %></td>
-            <td><%= r.firstname %></td>
-            <td><%= r.email %></td>
-            <td><%= r.rdv_date.toLocaleDateString("fr") %></td>
-            <td><%= r.rdv_heure %></td>
-          </tr>
-        </tbody>
-        <% }); %>
-      </table>
-      <a href="/prv/<%=user._id%>"
-        ><button
-          type="submit"
-          id="boutonRDV"
-          class="btn btn-outline-dark"
-          style="padding-left: 2.5rem; padding-right: 2.5rem"
+
+    <div class="container d-flex justify-content-around mt-5">
+      <div class="d-flex flex-grow-1 flex-column">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Email</th>
+              <th scope="col">Date RDV</th>
+              <th scope="col">Heure RDV</th>
+            </tr>
+          </thead>
+          <%rdv.forEach((r) => { %>
+          <tbody>
+            <tr>
+              <td><%= r.lastname %></td>
+              <td><%= r.firstname %></td>
+              <td><%= r.email %></td>
+              <td><%= r.rdv_date.toLocaleDateString("fr") %></td>
+              <td><%= r.rdv_heure %></td>
+            </tr>
+          </tbody>
+          <% }); %>
+        </table>
+        <a href="/"
+          ><button
+            type="submit"
+            id="boutonRDV"
+            class="btn btn-outline-dark"
+            style="padding-left: 2.5rem; padding-right: 2.5rem"
+          >
+            Prendre RDV
+          </button></a
         >
-          Prendre RDV
-        </button></a
-      >
+      </div>
+
+      <div class="px-5">
+        <h2 class="">Changer RDV</h2>
+        <form
+          action="/prv/edit/<%=user.email%>?_method=PUT"
+          method="post"
+          onsubmit="rdvcheck()"
+        >
+          <input type="hidden" name="_method" value="PUT" />
+
+          <label for="rdv_date">Date de RDV</label>
+          <br />
+          <input type="date" id="rdv_date" name="rdv_date" min="" />
+          <!-- <input type="date" id="rdv_date" name="rdv_date" value="<%#= %>" min="2018-01-01" max="2018-12-31"> -->
+          <br />
+          <label for="rdv_heure">Heure de RDV</label>
+          <br />
+          <input type="time" id="rdv_heure" name="rdv_heure" />
+          <br />
+          <br />
+          <button
+            type="submit"
+            id="boutonRDV"
+            class="btn btn-outline-dark"
+            style="padding-left: 2.5rem; padding-right: 2.5rem"
+          >
+            Modfier RDV
+          </button>
+        </form>
+      </div>
     </div>
-    <script type="text/javascript" src="js/toto.js"></script>
+    <script type="text/javascript" src="js/rdv.js"></script>
   </body>
 </html>
