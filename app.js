@@ -30,7 +30,7 @@ const connectionParams = {
 mongoose
   .connect(url, connectionParams)
   .then(() => {
-    console.log("MongoDB database connected !");
+    console.log("MongoDB database connected !!");
   })
   .catch((err) => console.log(err));
 
